@@ -47,12 +47,11 @@ const AddNewMovie = (props) => {
       </div>
       <div className={classes.control}>
         <label htmlFor="openingText">Opening Text:</label>
-        <textarea
+        <input
           id="openingText"
-          rows="5"
           value={openingText}
           onChange={openingTextChangeHandler}
-        ></textarea>
+        ></input>
       </div>
       <div className={classes.control}>
         <label htmlFor="releaseDate">Release Date:</label>
