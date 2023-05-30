@@ -1,5 +1,12 @@
 .form{
-    box-sizing: content-box;
+    
+    background-color: rgb(255, 255, 255);
+    border-radius: 2rem;
+    margin: 3% 10% 0 25%;
+    padding: 30px;
+    width: 50%;
+    
+
 }
 .control {
     margin: 1rem 0;
@@ -13,8 +20,7 @@
     text-align: left;
   }
   
-  .control input,
-  .control textarea {
+  .control input{
     display: block;
     width: 20%;
     font: inherit;
@@ -23,8 +29,7 @@
     border: 1px solid #ccc;
   }
   
-  .control input:focus,
-  .control textarea:focus {
+  .control input:focus{
     outline: none;
     border-color: #230052;
   }
