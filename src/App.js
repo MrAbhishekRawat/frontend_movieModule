@@ -9,9 +9,7 @@ function App() {
   const [retryCount, setRetryCount] = useState(0);
   const [isRetrying, setIsRetrying] = useState(false);
 
-  
-
-  const fetchMoviesHandler= useCallback(async()=>{
+  const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     setIsRetrying(false);
@@ -24,14 +22,12 @@ function App() {
 
       const data = await response.json();
 
-      const transformedData = data.results.map((movieData) => {
-        return {
-          id: movieData.episode_id,
-          title: movieData.title,
-          openingText: movieData.opening_crawl,
-          releaseDate: movieData.release_date,
-        };
-      });
+      const transformedData = data.results.map((movieData) => ({
+        id: movieData.episode_id,
+        title: movieData.title,
+        openingText: movieData.opening_crawl,
+        releaseDate: movieData.release_date,
+      }));
 
       setMovies(transformedData);
     } catch (error) {
@@ -43,28 +39,28 @@ function App() {
     }
 
     setIsLoading(false);
-  },[])
+  }, [isRetrying]);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchMoviesHandler();
-  },[fetchMoviesHandler])
+  }, [fetchMoviesHandler]);
 
   useEffect(() => {
     if (retryCount > 0) {
       const timer = setTimeout(fetchMoviesHandler, 5000);
       return () => clearTimeout(timer);
     }
-  }, [retryCount]);
+  }, [retryCount, fetchMoviesHandler]);
 
-  function handleRetryClick() {
+  const handleRetryClick = useCallback(() => {
     setRetryCount(1);
     setIsRetrying(true);
-  }
+  }, []);
 
-  function handleCancelClick() {
+  const handleCancelClick = useCallback(() => {
     setRetryCount(0);
     setIsRetrying(false);
-  }
+  }, []);
 
   let content = <p>No movies found.</p>;
   if (movies.length > 0) {
